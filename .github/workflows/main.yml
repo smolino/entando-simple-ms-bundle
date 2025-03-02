@@ -29,7 +29,6 @@ jobs:
         run: |
           echo "$DOCKER_PASSWORD" | docker login "$DOCKER_REGISTRY" -u "$DOCKER_USERNAME" --password-stdin
 
-          
       - name: Install OpenShift CLI
         env:
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
