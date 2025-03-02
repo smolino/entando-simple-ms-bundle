@@ -20,6 +20,16 @@ jobs:
         run: |
           mkdir -p .entando/logs
           chmod -R 777 .entando
+
+      - name: Login to Private Docker Registry
+        env:
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login "$DOCKER_REGISTRY" -u "$DOCKER_USERNAME" --password-stdin
+
+          
       - name: Install OpenShift CLI
         env:
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
